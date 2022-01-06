@@ -1,0 +1,359 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>lcn.menu_management.Application.Contracts</name>
+    </assembly>
+    <members>
+        <member name="T:lcn.menu_management.GrantMenu">
+            <summary>
+            设置菜单
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.GrantMenu.OwnerId">
+            <summary>
+            菜单拥有者ID
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.GrantMenu.Provider">
+            <summary>
+            类型
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.GrantMenu.MenuItems">
+            <summary>
+            菜单
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.AddUser2MenuGroup.MenuGroupIds">
+            <summary>
+            修改的菜单组集合
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuButtonDto.DisplayName">
+            <summary>
+            Display name of the menu item.
+            显示的菜单名字
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuButtonDto.Order">
+            <summary>
+            The Display order of the menu.
+            Default value: 1000.
+            排列顺序
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuButtonDto.Url">
+            <summary>
+            The URL to navigate when this menu item is selected.
+            点击该菜单的链接
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuButtonDto.Icon">
+            <summary>
+            Icon of the menu item if exists.
+            图标
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuButtonDto.Target">
+            <summary>
+            Target of the menu item. Can be null, "_blank", "_self", "_parent", "_top" or a frame name for web applications.
+            目标 可空,"_blank", "_self", "_parent", "_top"
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuButtonDto.ElementId">
+            <summary>
+            Can be used to render the element with a specific Id for DOM selections.
+            DOM的ID
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuButtonDto.CssClass">
+            <summary>
+            Can be used to render the element with extra CSS classes.
+            CSS类
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuDto.SubMenuItems">
+            <summary>
+            子菜单
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuDto.DisplayName">
+            <summary>
+            Display name of the menu item.
+            显示的菜单名字
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuDto.Order">
+            <summary>
+            The Display order of the menu.
+            Default value: 1000.
+            排列顺序
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuDto.Url">
+            <summary>
+            The URL to navigate when this menu item is selected.
+            点击该菜单的链接
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuDto.Icon">
+            <summary>
+            Icon of the menu item if exists.
+            图标
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuDto.Target">
+            <summary>
+            Target of the menu item. Can be null, "_blank", "_self", "_parent", "_top" or a frame name for web applications.
+            目标 可空,"_blank", "_self", "_parent", "_top"
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuDto.ElementId">
+            <summary>
+            Can be used to render the element with a specific Id for DOM selections.
+            DOM的ID
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuDto.CssClass">
+            <summary>
+            Can be used to render the element with extra CSS classes.
+            CSS类
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuGroupCreateDto.Name">
+            <summary>
+            分组名（key)
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuGroupCreateDto.NormalizedName">
+            <summary>
+            大写名称
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuGroupDto.Name">
+            <summary>
+            分组名（key)
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuGroupDto.NormalizedName">
+            <summary>
+            大写名称
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuGroupUpdateDto.Name">
+            <summary>
+            分组名（key)
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuGroupUpdateDto.NormalizedName">
+            <summary>
+            大写名称
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuItemCreateDto.ParentMenuItem">
+            <summary>
+            父节点ID
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuItemCreateDto.DisplayName">
+            <summary>
+            Display name of the menu item.
+            显示的菜单名字
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuItemCreateDto.Order">
+            <summary>
+            The Display order of the menu.
+            Default value: 1000.
+            排列顺序
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuItemCreateDto.Url">
+            <summary>
+            The URL to navigate when this menu item is selected.
+            点击该菜单的链接
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuItemCreateDto.Icon">
+            <summary>
+            Icon of the menu item if exists.
+            图标
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuItemCreateDto.Target">
+            <summary>
+            Target of the menu item. Can be null, "_blank", "_self", "_parent", "_top" or a frame name for web applications.
+            目标 可空,"_blank", "_self", "_parent", "_top"
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuItemCreateDto.IsDisabled">
+            <summary>
+            Can be used to disable this menu item.
+            禁用
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuItemCreateDto.ElementId">
+            <summary>
+            Can be used to render the element with a specific Id for DOM selections.
+            DOM的ID
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuItemCreateDto.CssClass">
+            <summary>
+            Can be used to render the element with extra CSS classes.
+            CSS类
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuItemDto.ParentMenuItem">
+            <summary>
+            父节点ID
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuItemDto.DisplayName">
+            <summary>
+            Display name of the menu item.
+            显示的菜单名字
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuItemDto.Order">
+            <summary>
+            The Display order of the menu.
+            Default value: 1000.
+            排列顺序
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuItemDto.Url">
+            <summary>
+            The URL to navigate when this menu item is selected.
+            点击该菜单的链接
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuItemDto.Icon">
+            <summary>
+            Icon of the menu item if exists.
+            图标
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuItemDto.Target">
+            <summary>
+            Target of the menu item. Can be null, "_blank", "_self", "_parent", "_top" or a frame name for web applications.
+            目标 可空,"_blank", "_self", "_parent", "_top"
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuItemDto.IsDisabled">
+            <summary>
+            Can be used to disable this menu item.
+            禁用
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuItemDto.ElementId">
+            <summary>
+            Can be used to render the element with a specific Id for DOM selections.
+            DOM的ID
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuItemDto.CssClass">
+            <summary>
+            Can be used to render the element with extra CSS classes.
+            CSS类
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuItemUpdateDto.ParentMenuItem">
+            <summary>
+            父节点ID
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuItemUpdateDto.DisplayName">
+            <summary>
+            Display name of the menu item.
+            显示的菜单名字
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuItemUpdateDto.Order">
+            <summary>
+            The Display order of the menu.
+            Default value: 1000.
+            排列顺序
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuItemUpdateDto.Url">
+            <summary>
+            The URL to navigate when this menu item is selected.
+            点击该菜单的链接
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuItemUpdateDto.Icon">
+            <summary>
+            Icon of the menu item if exists.
+            图标
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuItemUpdateDto.Target">
+            <summary>
+            Target of the menu item. Can be null, "_blank", "_self", "_parent", "_top" or a frame name for web applications.
+            目标 可空,"_blank", "_self", "_parent", "_top"
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuItemUpdateDto.IsDisabled">
+            <summary>
+            Can be used to disable this menu item.
+            禁用
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuItemUpdateDto.ElementId">
+            <summary>
+            Can be used to render the element with a specific Id for DOM selections.
+            DOM的ID
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuItemUpdateDto.CssClass">
+            <summary>
+            Can be used to render the element with extra CSS classes.
+            CSS类
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuTreeDto.ParentMenuItem">
+            <summary>
+            父节点ID
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuTreeDto.DisplayName">
+            <summary>
+            Display name of the menu item.
+            显示的菜单名字
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuTreeDto.Order">
+            <summary>
+            The Display order of the menu.
+            Default value: 1000.
+            排列顺序
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuTreeDto.IsMenuItem">
+            <summary>
+            是否是菜单
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuTreeDto.IsGrant">
+            <summary>
+            是否已经拥有
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.MenuTreeDto.IsGroupGrant">
+            <summary>
+            是菜单组范围
+            </summary>
+        </member>
+        <member name="T:lcn.menu_management.GetCurrentUserMenus">
+            <summary>
+            查询
+            </summary>
+        </member>
+        <member name="P:lcn.menu_management.GetMenuTree.TenantId">
+            <summary>
+            租户
+            </summary>
+        </member>
+    </members>
+</doc>
