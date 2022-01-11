@@ -2,12 +2,11 @@
 
 ## TODO 需要修改这里获取代码的方式
 
-
-
 ##获取代码并自增版本号
 Write-Host "============准备获取代码==================="
+
 ##获取代码 需要系统配置好tf.exe的路径
-& tf get $/Modules/lcn.menu_management /recursive /overwrite #强制遍历获取项目代码 其中$符号代表是工作区映射的本地文件夹
+##& tf get $/Modules/lcn.menu_management /recursive /overwrite #强制遍历获取项目代码 其中$符号代表是工作区映射的本地文件夹
 
 if (-Not $?) {
         Write-Host ("获取源代码失败，脚本停止继续执行，将退出 ")
@@ -16,7 +15,7 @@ if (-Not $?) {
 Write-Host "============完成获取代码==================="
 ##签出项目用于升级引用包（如果有的话）
 ##签出共有版本号保存地方
-&tf checkout $/Modules/lcn.menu_management/common.props
+##&tf checkout $/Modules/lcn.menu_management/common.props
 Write-Host "============签出共同项目配置文件==================="
 ##定位到要操作的文件夹根
 Set-Location $rootFolder

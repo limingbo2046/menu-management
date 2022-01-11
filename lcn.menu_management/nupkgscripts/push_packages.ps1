@@ -9,12 +9,12 @@ Set-Location $packFolder
 # Publish all packages
 foreach($project in $projects) {
     $projectName = $project.Substring($project.LastIndexOf("/") + 1)
-#    & dotnet nuget push ($projectName + "." + $version + ".nupkg") -s https://api.nuget.org/v3/index.json --api-key "$apiKey"
-& dotnet nuget push ($projectName + "." + $version + ".nupkg") -s http://10.161.117.131:8888/nuget --api-key guang-zhou-nuget-server --skip-duplicate
+    ## 第一次推包要手动上传 https://www.nuget.org/packages/manage/upload
+    & dotnet nuget push ($projectName + "." + $version + ".nupkg") --api-key 【】 --source https://api.nuget.org/v3/index.json
 }
 
 
 ##回到解决方案
-Set-Location $rootFolder
+#Set-Location $rootFolder
 
-tf checkin common.props /noprompt /comment:"更新版本"
+#tf checkin common.props /noprompt /comment:"更新版本"
