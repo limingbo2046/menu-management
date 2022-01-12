@@ -29,6 +29,7 @@ namespace lcn.menu_management
     public class GetMenuGroupByUser
     {
         public Guid UserId { get; set; }
+        public Guid? TenantId { get; set; }
     }
 
 }

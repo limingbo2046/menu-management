@@ -21,15 +21,23 @@ namespace lcn.menu_management
         }
         public async Task<List<MenuGroupDto>> Query(GetMenuGroupByUser input)
         {
-            var menugroups = await AsyncExecuter.ToListAsync(from um in _UserMenuGroupsRepo where um.UserId == input.UserId select um.MenuGroupId);
-            var result = await AsyncExecuter.ToListAsync(Repository.WhereIf(true, p => menugroups.Contains(p.Id)));
+            var user_menugroups = await AsyncExecuter.ToListAsync(
+                from um in _UserMenuGroupsRepo
+                where
+                um.UserId == input.UserId
+                && um.TenantId == input.TenantId
+                select um.MenuGroupId);//在用户与菜单组的关联关系集合中获取菜单组的ID
+
+            var result = await AsyncExecuter.ToListAsync(Repository.Where(p => user_menugroups.Contains(p.Id)));//在ID集合中获取菜单组
+
             return ObjectMapper.Map<List<MenuGroup>, List<MenuGroupDto>>(result);
         }
-     
+
 
         public async Task AddUser2MenuGroupAsync(AddUser2MenuGroup input)
         {
-            var groupIds = await AsyncExecuter.ToListAsync(_UserMenuGroupsRepo.WhereIf(true, p => p.UserId == input.UserId).Select(p => p.MenuGroupId));
+
+            var groupIds = await AsyncExecuter.ToListAsync(_UserMenuGroupsRepo.Where(p => p.UserId == input.UserId).Select(p => p.MenuGroupId));
             //var userGroups = _UserMenuGroupsRepo.Where(p => p.UserId == input.UserId).ToList();
             //var groupIds = userGroups.Select(p => p.MenuGroupId).ToList();
             var removeGroup = groupIds.Except(input.MenuGroupIds).ToList();//找出被排除的菜单组
