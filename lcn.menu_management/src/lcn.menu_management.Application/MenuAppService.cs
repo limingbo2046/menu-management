@@ -37,11 +37,11 @@ namespace lcn.menu_management
             var result = ObjectMapper.Map<List<MenuItem>, List<MenuItemDto>>(listAll);
             result = result.OrderBy(p => p.Order).ToList();
             List<MenuItemDto> resultItem = new();
-            var parentItems = result.Where(p => !p.ParentMenuItem.HasValue);
+            var parentItems = result.Where(p => !p.ParentMenuItem.HasValue);//根节点
             foreach (var item in parentItems)
             {
                 resultItem.Add(item);
-                await AddSubItemAsync(item, result);
+                await AddSubItemAsync(item, result);//把根节点的子节点填充
             }
 
             return new PagedResultDto<MenuItemDto>(resultItem.Count, resultItem);
@@ -139,7 +139,7 @@ namespace lcn.menu_management
             }
             return lstResult;
         }
-      
+
         #endregion
 
         #region 命令
@@ -187,11 +187,30 @@ namespace lcn.menu_management
                 }
             }
         }
-        
+        public async Task AssignedTenant2MenuItemAsync(AssignedTenant2MenuItem input)
+        {
+            var rootMenu = await Repository.FindAsync(p => p.Id == input.RootMenuItemId);
+            await UpdateTenantId(rootMenu, input.TenantId);
+        }
         #endregion
 
         #region 私有方法
+        private async Task UpdateTenantId(MenuItem menuItem, Guid tenantId)
+        {
+            menuItem.TenantId = tenantId;//赋值租户
 
+            var list = await AsyncExecuter.ToListAsync(
+                from m in Repository
+                where m.ParentMenuItem == menuItem.Id
+                select m
+                );
+
+            foreach (var item in list)
+            {
+                await UpdateTenantId(item, tenantId);
+            }
+
+        }
         /// <summary>
         /// 属性结构的菜单组成列表
         /// </summary>
@@ -264,6 +283,8 @@ namespace lcn.menu_management
             }
 
         }
+
+
         #endregion
 
     }

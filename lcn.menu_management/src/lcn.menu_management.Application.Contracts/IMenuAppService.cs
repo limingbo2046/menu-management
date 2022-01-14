@@ -13,5 +13,6 @@ namespace lcn.menu_management
         Task<List<MenuButtonDto>> Query(GetCurrentUserButtons query);
         Task<List<MenuTreeDto>> Query(GetMenuTree query);
         Task GrantMenuAsync(GrantMenu input);
+       Task AssignedTenant2MenuItemAsync(AssignedTenant2MenuItem input);
     }
 }

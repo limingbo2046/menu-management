@@ -44,12 +44,21 @@ namespace lcn.menu_management
         {
             return await appService.GetListAsync(input);
         }
-        [HttpGet]
+        [HttpPost]
         [Route(nameof(GrantMenuAsync))]
         public async Task GrantMenuAsync(GrantMenu input)
         {
             await appService.GrantMenuAsync(input);
         }
+
+        [HttpPost]
+        [Route(nameof(AssignedTenant2MenuItemAsync))]
+        public async Task AssignedTenant2MenuItemAsync(AssignedTenant2MenuItem input)
+        {
+            await appService.AssignedTenant2MenuItemAsync(input);
+        }
+
+
         [HttpGet]
         [Route(nameof(GetCurrentUserMenus))]
         public async Task<List<MenuDto>> Query(GetCurrentUserMenus query)

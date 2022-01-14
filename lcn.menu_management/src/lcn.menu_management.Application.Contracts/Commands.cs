@@ -34,5 +34,12 @@ namespace lcn.menu_management
         /// </summary>
         public Guid[] MenuGroupIds { get; set; }
     }
-
+    /// <summary>
+    /// 为菜单指定租户
+    /// </summary>
+    public class AssignedTenant2MenuItem
+    {
+        public Guid TenantId { get; set; }
+        public Guid RootMenuItemId { get; set; }
+    }
 }
