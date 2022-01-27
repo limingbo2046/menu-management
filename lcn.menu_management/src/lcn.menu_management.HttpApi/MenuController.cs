@@ -10,7 +10,7 @@ using Volo.Abp.Application.Dtos;
 namespace lcn.menu_management
 {
     [RemoteService]
-    [Route("api/menu")]
+    [Route("api/v1/MenuManagement")]
     public class MenuController : menu_managementController
     {
         private readonly IMenuAppService appService;
@@ -21,38 +21,38 @@ namespace lcn.menu_management
         }
 
         [HttpPost]
-        [Route(nameof(CreateAsync))]
+        
         public async Task<MenuItemDto> CreateAsync(MenuItemCreateDto input)
         {
             return await appService.CreateAsync(input);
         }
         [HttpDelete]
-        [Route(nameof(DeleteAsync))]
+        [Route("{id}")]
         public async Task DeleteAsync(Guid id)
         {
             await appService.DeleteAsync(id);
         }
         [HttpGet]
-        [Route(nameof(GetAsync))]
+        //[Route(nameof(GetAsync))]
         public async Task<MenuItemDto> GetAsync(Guid id)
         {
             return await appService.GetAsync(id);
         }
         [HttpGet]
-        [Route(nameof(GetListAsync))]
+        [Route("all")]
         public async Task<PagedResultDto<MenuItemDto>> GetListAsync(MenuItemRequestDto input)
         {
             return await appService.GetListAsync(input);
         }
         [HttpPost]
-        [Route(nameof(GrantMenuAsync))]
+        [Route("GrantMenuItem")]
         public async Task GrantMenuAsync(GrantMenu input)
         {
             await appService.GrantMenuAsync(input);
         }
 
         [HttpPost]
-        [Route(nameof(AssignedTenant2MenuItemAsync))]
+        [Route("AssignedTenant2MenuItem")]
         public async Task AssignedTenant2MenuItemAsync(AssignedTenant2MenuItem input)
         {
             await appService.AssignedTenant2MenuItemAsync(input);
@@ -79,7 +79,7 @@ namespace lcn.menu_management
         }
 
         [HttpPut]
-        [Route(nameof(UpdateAsync))]
+        [Route("{id}")]
         public async Task<MenuItemDto> UpdateAsync(Guid id, MenuItemUpdateDto input)
         {
             return await appService.UpdateAsync(id, input);

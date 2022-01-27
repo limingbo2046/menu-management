@@ -10,7 +10,7 @@ using Volo.Abp.Application.Dtos;
 namespace lcn.menu_management
 {
     [RemoteService]
-    [Route("api/menu-group")]
+    [Route("api/v1/MenuGroup")]
     public class MenuGroupController : menu_managementController
     {
         private readonly IMenuGroupAppService appService;
@@ -20,31 +20,31 @@ namespace lcn.menu_management
             this.appService = appService;
         }
         [HttpPost]
-        [Route(nameof(AddUser2MenuGroupAsync))]
+        [Route("AddUser2MenuGroup")]
         public async Task AddUser2MenuGroupAsync(AddUser2MenuGroup input)
         {
             await appService.AddUser2MenuGroupAsync(input);
         }
         [HttpPost]
-        [Route(nameof(CreateAsync))]
+        //[Route(nameof(CreateAsync))]
         public async Task<MenuGroupDto> CreateAsync(MenuGroupCreateDto input)
         {
             return await appService.CreateAsync(input);
         }
         [HttpDelete]
-        [Route(nameof(DeleteAsync))]
+        [Route("{id}")]
         public async Task DeleteAsync(Guid id)
         {
             await appService.DeleteAsync(id);
         }
         [HttpGet]
-        [Route(nameof(GetAsync))]
+        //[Route(nameof(GetAsync))]
         public async Task<MenuGroupDto> GetAsync(Guid id)
         {
             return await appService.GetAsync(id);
         }
         [HttpGet]
-        [Route(nameof(GetListAsync))]
+        [Route("all")]
         public async Task<PagedResultDto<MenuGroupDto>> GetListAsync(PagedAndSortedResultRequestDto input)
         {
             return await appService.GetListAsync(input);
@@ -58,7 +58,7 @@ namespace lcn.menu_management
         }
 
         [HttpPut]
-        [Route(nameof(UpdateAsync))]
+        [Route("{id}")]
         public async Task<MenuGroupDto> UpdateAsync(Guid id, MenuGroupUpdateDto input)
         {
             return await appService.UpdateAsync(id, input);
