@@ -10,7 +10,7 @@ Set-Location $packFolder
 foreach($project in $projects) {
     $projectName = $project.Substring($project.LastIndexOf("/") + 1)
     ## 第一次推包要手动上传 https://www.nuget.org/packages/manage/upload
-    & dotnet nuget push ($projectName + "." + $version + ".nupkg") --api-key 【】 --source https://api.nuget.org/v3/index.json
+    & dotnet nuget push ($projectName + "." + $version + ".nupkg") --api-key oy2evrqun5grt2t7rqtaldokoatjgpku3kpobkt7t6tkri --source https://api.nuget.org/v3/index.json
 }
 
 
