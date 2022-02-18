@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
+using Volo.Abp.MultiTenancy;
 
 namespace lcn.menu_management
 {
@@ -15,7 +16,6 @@ namespace lcn.menu_management
         private readonly IRepository<MenuGroup> _menuGroupsRepo;//菜单组
         private readonly IRepository<MenuGrant> _menuGrantsRepo;//菜单范围
         private readonly IRepository<UserMenuGroups> _userMenuGroups;//用户和菜单组的关系
-
 
 
         public MenuAppService(
@@ -54,6 +54,7 @@ namespace lcn.menu_management
         /// <returns></returns>
         public async Task<List<MenuDto>> Query(GetCurrentUserMenus query)
         {
+
             List<MenuDto> lstResult = new();
 
             var menuItems = await GetCurrentUserMenuItemAsync();
@@ -78,6 +79,8 @@ namespace lcn.menu_management
         /// <returns></returns>
         public async Task<List<MenuButtonDto>> Query(GetCurrentUserButtons query)
         {
+
+
             var menuItems = await GetCurrentUserMenuItemAsync(false);
             if (query.TreeNodeId.HasValue)
             {
@@ -94,8 +97,10 @@ namespace lcn.menu_management
         /// <returns></returns>
         public async Task<List<MenuTreeDto>> Query(GetMenuTree query)
         {
+
+            CurrentTenant.Change(query.TenantId);
             //添加租户过滤
-            var lstAll = await AsyncExecuter.ToListAsync(from m in Repository where m.TenantId == query.TenantId select m);
+            var lstAll = await AsyncExecuter.ToListAsync(from m in Repository select m);
             var lstTree = ObjectMapper.Map<List<MenuItem>, List<MenuTreeDto>>(lstAll).ToList();
             lstTree = lstTree.OrderBy(p => p.Order).ToList();
             List<Guid> lstGrantMenuItemIds = new List<Guid>();
@@ -146,6 +151,8 @@ namespace lcn.menu_management
 
         public async Task GrantMenuAsync(GrantMenu input)
         {
+
+
             bool isGroupOwner = false;//拥有菜单是用户
             var groupOwner = await _menuGroupsRepo.FindAsync(p => p.Id == input.OwnerId);
             if (groupOwner != null)
@@ -170,7 +177,7 @@ namespace lcn.menu_management
                     {
                         if (item.IsGrant)//传递进来的是赋予的
                         {
-                            await _menuGrantsRepo.InsertAsync(new MenuGrant(GuidGenerator.Create(), input.OwnerId, item.Id, input.Provider));
+                            await _menuGrantsRepo.InsertAsync(new MenuGrant(GuidGenerator.Create(), input.OwnerId, item.Id, input.Provider, CurrentTenant.Id));
                         }
                     }
                     else//如果关系存在
@@ -187,18 +194,23 @@ namespace lcn.menu_management
                 }
             }
         }
+        /// <summary>
+        /// 为菜单指定租户，所以必须有租户
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task AssignedTenant2MenuItemAsync(AssignedTenant2MenuItem input)
         {
             var rootMenu = await Repository.FindAsync(p => p.Id == input.RootMenuItemId);
-            await UpdateTenantId(rootMenu, input.TenantId);
+            await UpdateTenantId(rootMenu, input.TenantId, input.FromTenantId);
         }
         #endregion
 
         #region 私有方法
-        private async Task UpdateTenantId(MenuItem menuItem, Guid tenantId)
+        private async Task UpdateTenantId(MenuItem menuItem, Guid tenantId, Guid? fromTenantId)
         {
             menuItem.TenantId = tenantId;//赋值租户
-
+            CurrentTenant.Change(fromTenantId);
             var list = await AsyncExecuter.ToListAsync(
                 from m in Repository
                 where m.ParentMenuItem == menuItem.Id
@@ -207,7 +219,7 @@ namespace lcn.menu_management
 
             foreach (var item in list)
             {
-                await UpdateTenantId(item, tenantId);
+                await UpdateTenantId(item, tenantId, fromTenantId);
             }
 
         }
@@ -249,6 +261,7 @@ namespace lcn.menu_management
             {
                 return new List<MenuItem>();
             }
+
             var list = await AsyncExecuter.ToListAsync(from ug in _userMenuGroups where ug.UserId == CurrentUser.Id select ug.MenuGroupId);//获取当前用户所拥有的角色组
             list.Add(CurrentUser.Id.Value);//把菜单组ID和用户ID组成菜单拥有者列表
             var lstMenuIds = await AsyncExecuter.ToListAsync(from m in _menuGrantsRepo where list.Contains(m.OwnerId) select m.MenuId);

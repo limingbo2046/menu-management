@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Entities;
+using Volo.Abp.MultiTenancy;
 
 namespace lcn.menu_management
 {
     /// <summary>
     /// 菜单组（可以按角色看待）
     /// </summary>
-    public class MenuGroup : Entity<Guid>
+    public class MenuGroup : Entity<Guid>, IMultiTenant
     {
         public Guid? TenantId { get; set; }
         /// <summary>

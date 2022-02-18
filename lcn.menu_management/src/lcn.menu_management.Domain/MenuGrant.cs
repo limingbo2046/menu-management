@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Entities;
+using Volo.Abp.MultiTenancy;
 
 namespace lcn.menu_management
 {
@@ -11,7 +12,7 @@ namespace lcn.menu_management
     /// 用户和菜单&按钮的关系
     /// 组成得到一个用户前端能使用业务菜单和按钮
     /// </summary>
-    public class MenuGrant : Entity<Guid>
+    public class MenuGrant : Entity<Guid>, IMultiTenant
     {
         public Guid? TenantId { get; set; }
         /// <summary>
@@ -27,15 +28,16 @@ namespace lcn.menu_management
         /// 拥有者类型
         /// </summary>
         public string OwnerProvider { get; set; }
-        public MenuGrant()
+        protected MenuGrant()
         {
 
         }
-        public MenuGrant(Guid id, Guid ownerId, Guid menuId,string ownerProvider) : base(id)
+        public MenuGrant(Guid id, Guid ownerId, Guid menuId,string ownerProvider,Guid?tenantId) : base(id)
         {
             OwnerId = ownerId;
             MenuId = menuId;
             OwnerProvider = ownerProvider;
+            TenantId = tenantId;
         }
     }
 }

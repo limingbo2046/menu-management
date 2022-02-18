@@ -7,6 +7,6 @@ namespace lcn.menu_management
 {
     public class MenuItemRequestDto : PagedAndSortedResultRequestDto
     {
-        
+    
     }
 }

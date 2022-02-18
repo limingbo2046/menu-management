@@ -29,6 +29,7 @@ namespace lcn.menu_management
     {
         [Required]
         public Guid UserId { get; set; }
+        public Guid? TenantId { get; set; }
         /// <summary>
         /// 修改的菜单组集合
         /// </summary>
@@ -39,7 +40,8 @@ namespace lcn.menu_management
     /// </summary>
     public class AssignedTenant2MenuItem
     {
-        public Guid TenantId { get; set; }
         public Guid RootMenuItemId { get; set; }
+        public Guid TenantId { get; set; }
+        public Guid? FromTenantId { get; set; }//可以迁移菜单
     }
 }

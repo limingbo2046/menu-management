@@ -51,7 +51,7 @@ namespace lcn.menu_management
         }
 
         [HttpGet]
-        [Route(nameof(GetMenuGroupByUser))]
+        [Route("MenuGroupByUser")]
         public async Task<List<MenuGroupDto>> Query(GetMenuGroupByUser input)
         {
             return await appService.Query(input);

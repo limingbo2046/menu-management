@@ -21,11 +21,13 @@ namespace lcn.menu_management
         }
         public async Task<List<MenuGroupDto>> Query(GetMenuGroupByUser input)
         {
+            CurrentTenant.Change(input.TenantId);
+
             var user_menugroups = await AsyncExecuter.ToListAsync(
                 from um in _UserMenuGroupsRepo
                 where
                 um.UserId == input.UserId
-                && um.TenantId == input.TenantId
+
                 select um.MenuGroupId);//在用户与菜单组的关联关系集合中获取菜单组的ID
 
             var result = await AsyncExecuter.ToListAsync(Repository.Where(p => user_menugroups.Contains(p.Id)));//在ID集合中获取菜单组
@@ -37,6 +39,7 @@ namespace lcn.menu_management
         public async Task AddUser2MenuGroupAsync(AddUser2MenuGroup input)
         {
 
+            CurrentTenant.Change(input.TenantId);//自己找用户的租户ID很难，只好通过传递进来
             var groupIds = await AsyncExecuter.ToListAsync(_UserMenuGroupsRepo.Where(p => p.UserId == input.UserId).Select(p => p.MenuGroupId));
             //var userGroups = _UserMenuGroupsRepo.Where(p => p.UserId == input.UserId).ToList();
             //var groupIds = userGroups.Select(p => p.MenuGroupId).ToList();
@@ -55,7 +58,7 @@ namespace lcn.menu_management
             {
                 foreach (var id in addGroup)
                 {
-                    await _UserMenuGroupsRepo.InsertAsync(new UserMenuGroups(id, input.UserId));
+                    await _UserMenuGroupsRepo.InsertAsync(new UserMenuGroups(id, input.UserId, input.TenantId));
                 }
             }
         }

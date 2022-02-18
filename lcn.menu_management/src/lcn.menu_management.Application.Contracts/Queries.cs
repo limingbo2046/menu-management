@@ -20,9 +20,6 @@ namespace lcn.menu_management
     {
         [Required]
         public Guid OwnerId { get; set; }
-        /// <summary>
-        /// 租户
-        /// </summary>
         public Guid? TenantId { get; set; }
     }
 

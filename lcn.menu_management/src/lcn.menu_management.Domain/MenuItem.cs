@@ -7,13 +7,14 @@ using System.ComponentModel.DataAnnotations;
 using JetBrains.Annotations;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Volo.Abp.MultiTenancy;
 
 namespace lcn.menu_management
 {
     /// <summary>
     /// 菜单和按钮组合在这里
     /// </summary>
-    public class MenuItem : Entity<Guid>
+    public class MenuItem : Entity<Guid>, IMultiTenant
     {
         /// <summary>
         /// 父菜单（为空的时候，将当作是子系统的根菜单）

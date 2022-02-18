@@ -1,9 +1,10 @@
 ﻿using System;
 using Volo.Abp.Domain.Entities;
+using Volo.Abp.MultiTenancy;
 
 namespace lcn.menu_management
 {
-    public class UserMenuGroups : Entity<Guid>
+    public class UserMenuGroups : Entity<Guid>, IMultiTenant
     {
         public Guid? TenantId { get; protected set; }
         public Guid UserId { get; protected set; }

@@ -36,7 +36,7 @@ namespace lcn.menu_management
             {
                 return;
             }
-            await _MenuGrantsRepo.InsertAsync(new MenuGrant(GuidGenerator.Create(), group.Id, menuItem.Id, "G"));
+            await _MenuGrantsRepo.InsertAsync(new MenuGrant(GuidGenerator.Create(), group.Id, menuItem.Id, "G", menuItem.TenantId));
         }
     }
 }
