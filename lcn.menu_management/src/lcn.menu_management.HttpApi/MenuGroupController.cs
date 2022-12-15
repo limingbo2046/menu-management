@@ -45,7 +45,7 @@ namespace lcn.menu_management
         }
         [HttpGet]
         [Route("all")]
-        public async Task<PagedResultDto<MenuGroupDto>> GetListAsync(PagedAndSortedResultRequestDto input)
+        public async Task<PagedResultDto<MenuGroupDto>> GetListAsync(MenuGroupRequestDto input)
         {
             return await appService.GetListAsync(input);
         }

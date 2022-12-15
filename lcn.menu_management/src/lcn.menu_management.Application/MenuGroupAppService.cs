@@ -9,7 +9,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace lcn.menu_management
 {
-    public class MenuGroupAppService : CrudAppService<MenuGroup, MenuGroupDto, Guid, PagedAndSortedResultRequestDto, MenuGroupCreateDto, MenuGroupUpdateDto>, IMenuGroupAppService
+    public class MenuGroupAppService : CrudAppService<MenuGroup, MenuGroupDto, Guid, MenuGroupRequestDto, MenuGroupCreateDto, MenuGroupUpdateDto>, IMenuGroupAppService
     {
         protected IRepository<UserMenuGroups> _UserMenuGroupsRepo;
         public MenuGroupAppService(
@@ -18,6 +18,12 @@ namespace lcn.menu_management
             ) : base(menuGroups)
         {
             _UserMenuGroupsRepo = userMenuGroups;
+        }
+        public async override Task<PagedResultDto<MenuGroupDto>> GetListAsync(MenuGroupRequestDto input)
+        {
+            var menu_group_list = await AsyncExecuter.ToListAsync(Repository.WhereIf(!String.IsNullOrWhiteSpace(input.MenuGroupName), p => p.Name.Contains(input.MenuGroupName.Trim())));
+            var list = ObjectMapper.Map<List<MenuGroup>, List<MenuGroupDto>>(menu_group_list);
+            return new PagedResultDto<MenuGroupDto>(list.Count, list);
         }
         public async Task<List<MenuGroupDto>> Query(GetMenuGroupByUser input)
         {
