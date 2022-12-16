@@ -62,5 +62,9 @@ namespace lcn.menu_management
         /// CSS类
         /// </summary>
         public string CssClass { get; set; }
+        /// <summary>
+        /// 自定义参数
+        /// </summary>
+        public string CustomData { get; set; }
     }
 }
