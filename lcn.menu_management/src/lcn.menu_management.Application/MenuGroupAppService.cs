@@ -21,7 +21,13 @@ namespace lcn.menu_management
         }
         public async override Task<PagedResultDto<MenuGroupDto>> GetListAsync(MenuGroupRequestDto input)
         {
-            var menu_group_list = await AsyncExecuter.ToListAsync(Repository.WhereIf(!String.IsNullOrWhiteSpace(input.MenuGroupName), p => p.Name.Contains(input.MenuGroupName.Trim())).Skip(input.SkipCount).Take(input.MaxResultCount));
+            var menu_group_list = await AsyncExecuter.ToListAsync(
+                Repository.WhereIf(!String.IsNullOrWhiteSpace(input.MenuGroupName),
+                p => p.Name.Contains(input.MenuGroupName.Trim()) ||
+                p.NormalizedName.Contains(input.MenuGroupName.Trim()))
+                .Skip(input.SkipCount)
+                .Take(input.MaxResultCount));
+
             var list = ObjectMapper.Map<List<MenuGroup>, List<MenuGroupDto>>(menu_group_list);
             return new PagedResultDto<MenuGroupDto>(list.Count, list);
         }
