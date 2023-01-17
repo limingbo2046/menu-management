@@ -57,6 +57,7 @@ namespace lcn.menu_management
         /// </summary>
         public string ElementId { get; set; }
 
+        public string CustomData { get; set; }
         /// <summary>
         /// Can be used to render the element with extra CSS classes.
         /// CSS类
